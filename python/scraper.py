@@ -83,7 +83,7 @@ else:
   
   pddata = pd.DataFrame(lol, columns=['setdate','cusip','symbol','qftd','description','price'])
   connstr = (r'Driver={ODBC Driver 18 for SQL Server};'
-             f'Server={azaqlserver}'
+             f'Server={azsqlserver}'
              'Database=SEC-FTD-DEV;'
              'Persist Security Info=False;'
              f'Uid={azuid};'
