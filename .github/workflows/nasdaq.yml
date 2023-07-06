@@ -1,7 +1,7 @@
 name: Grab daily (trading day) NASDAQ data
 
 on:
-  schedule: # Manually trigger the workflow
+  schedule:
     - cron: "0 3 * * *" # Run at 3AM UTC everyday
 jobs:
   scrape_and_download:
