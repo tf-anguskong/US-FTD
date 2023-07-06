@@ -25,7 +25,7 @@ response = requests.get('https://api.tradier.com/v1/markets/calendar', # Used to
 )
 json_response = response.json()
 headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36'} # Seems to block python user agent :*(
-csv_filepath = f'./NASDAQ-Scraper/nasdaq-eod-{ymd}.csv'
+csv_filepath = f'./NASDAQ-scraper/nasdaq-eod-{ymd}.csv'
 
 azsqlpw = os.getenv('SQL_PASSWORD')
 azuid = os.getenv('SQL_UID')
