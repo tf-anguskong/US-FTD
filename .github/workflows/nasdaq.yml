@@ -3,6 +3,7 @@ name: Grab daily (trading day) NASDAQ data
 on:
   schedule:
     - cron: "10 20 * * *" # Run at 8:10PM UTC / 4:10PM EST everyday
+
 jobs:
   scrape_and_download:
     runs-on: ubuntu-latest
