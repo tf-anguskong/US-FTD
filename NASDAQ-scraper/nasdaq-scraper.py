@@ -86,7 +86,7 @@ elif market_status == 'open':
   cnxn = pyodbc.connect(connstr)
   cursor = cnxn.cursor()  
   for index, row in pddata.iterrows():
-    if index % 1000 == 0:
+    if index % 10 == 0:
       now = datetime.now()
       current_time = now.strftime("%H:%M:%S")
       print(f'Time: {current_time} : i = {index}')
