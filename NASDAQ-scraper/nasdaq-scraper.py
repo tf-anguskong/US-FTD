@@ -100,10 +100,13 @@ elif market_status == 'open':
     except:
        row.marketCap = 0
     # pctchange field being picky
-    if row.pctchange == '':
-       row.pctchange = 0 
-    else:
-       row.pctchange = row.pctchange[0:-1]
+    try:
+      if row.pctchange == '':
+        row.pctchange = 0 
+      else:
+        row.pctchange = row.pctchange[0:-1]
+    except:
+      row.pctchange = 0 
     cursor.execute(
                 f"INSERT INTO [dbo].[nasdaq_data] ([injestdate],[symbol],[name_des],[closeprice],[netchange],[pctchange],[volume],[marketCap],[country],[ipoyear],[industry],[sector],[uri]) values(?,?,?,?,?,?,?,?,?,?,?,?,?)", 
                 ymd,
