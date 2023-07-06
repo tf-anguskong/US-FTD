@@ -112,7 +112,7 @@ elif market_status == 'open':
                 ymd,
                 row.symbol, 
                 row.name_des, 
-                decimal.Decimal(row.closeprice[1:]),
+                float(round(row.closeprice[1:]),2),
                 decimal.Decimal(row.netchange),
                 decimal.Decimal(row.pctchange),
                 int(row.volume),
