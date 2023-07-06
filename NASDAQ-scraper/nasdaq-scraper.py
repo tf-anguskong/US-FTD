@@ -90,11 +90,16 @@ elif market_status == 'open':
       now = datetime.now()
       current_time = now.strftime("%H:%M:%S")
       print(f'Time: {current_time} : i = {index}')
-    if row.marketCap == '':
+    #marketCap field is REAL picky
+    try:
+      if row.marketCap == '':
+        row.marketCap = 0
+      else: 
+       row.marketCap = row.marketCap[:-3]
+       row.marketCap = 0 #Yolo
+    except:
        row.marketCap = 0
-    else: 
-       try: row.marketCap = row.marketCap[:-3]
-       except: row.marketCap = 0 #Yolo
+    # pctchange field being picky
     if row.pctchange == '':
        row.pctchange = 0 
     else:
