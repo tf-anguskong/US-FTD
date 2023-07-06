@@ -34,7 +34,7 @@ jobs:
           SQL_SERVER:  ${{ secrets.SQLSERVER }}
           ND_DATA: ${{ secrets.NDDATA }}
         run: | 
-          python ./python/nasdaq-scraper.py
+          python ./NASDAQ-scraper/nasdaq-scraper.py
           git config user.name github-actions
           git config user.email tyler@thecybernetwork.us
           git commit -am "Updated File Hash" || echo "There is nothing to commit"
