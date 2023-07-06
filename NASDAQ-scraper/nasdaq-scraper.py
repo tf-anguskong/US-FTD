@@ -102,11 +102,11 @@ elif market_status == 'open':
     # pctchange field being picky
     try:
       if row.pctchange == '':
-        row.pctchange = 0 
+        pct_change = row.pctchange = 0 
       else:
         pct_change = float(row.pctchange[0:-1])
     except:
-      row.pctchange = 0
+      pct_change = row.pctchange = 0
 
     try: close_price_int = float(row.closeprice[1:])
     except: row.closeprice = '0.00'
@@ -118,7 +118,7 @@ elif market_status == 'open':
                 row.name_des, 
                 round(close_price_int,2),
                 decimal.Decimal(row.netchange),
-                round(pct_change,2),
+                round(pct_change,3),
                 int(row.volume),
                 int(row.marketCap),
                 row.country,
