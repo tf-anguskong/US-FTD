@@ -107,7 +107,13 @@ elif market_status == 'open':
         row.pctchange = row.pctchange[0:-1]
     except:
       row.pctchange = 0
-    close_price_int = float(row.closeprice[1:])
+
+    if row.closeprice == '0':
+      row.closeprice = '0.00'
+      close_price_int = float(row.closeprice[1:])
+    else:
+      close_price_int = float(row.closeprice[1:])
+
     cursor.execute(
                 f"INSERT INTO [dbo].[nasdaq_data] ([injestdate],[symbol],[name_des],[closeprice],[netchange],[pctchange],[volume],[marketCap],[country],[ipoyear],[industry],[sector],[uri]) values(?,?,?,?,?,?,?,?,?,?,?,?,?)", 
                 ymd,
