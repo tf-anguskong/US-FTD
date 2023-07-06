@@ -96,7 +96,6 @@ elif market_status == 'open':
         row.marketCap = 0
       else: 
        row.marketCap = row.marketCap[:-3]
-       row.marketCap = 0 #Yolo
     except:
        row.marketCap = 0
     # pctchange field being picky
