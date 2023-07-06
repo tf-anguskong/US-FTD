@@ -1,0 +1,39 @@
+name: Grab daily (trading day) NASDAQ data
+
+on:
+  schedule: # Manually trigger the workflow
+    - cron: "0 3 * * *" # Run at 3AM UTC everyday
+jobs:
+  scrape_and_download:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.x"
+    
+      - name: set TimeZone to EST
+        run : sudo timedatectl set-timezone America/New_York
+
+      - name: Install python dependencies
+        run: pip install beautifulsoup4 requests pyodbc pandas
+        
+      - name: Install ODBC 18 Driver
+        run: sudo ACCEPT_EULA=Y apt-get install msodbcsql18 -y
+        
+      - name: Scrape NASDAQ Site, Parse, and Insert into Azure SQL DB
+        env:
+          SQL_PASSWORD: ${{ secrets.SQLPW }}
+          SQL_UID: ${{ secrets.SQLUID }}
+          SQL_SERVER:  ${{ secrets.SQLSERVER }}
+          ND_DATA: ${{ secrets.NDDATA }}
+        run: | 
+          python ./python/nasdaq-scraper.py
+          git config user.name github-actions
+          git config user.email tyler@thecybernetwork.us
+          git commit -am "Updated File Hash" || echo "There is nothing to commit"
+          git push
