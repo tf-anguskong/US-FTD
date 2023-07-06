@@ -104,7 +104,7 @@ elif market_status == 'open':
       if row.pctchange == '':
         row.pctchange = 0 
       else:
-        row.pctchange = row.pctchange[0:-1]
+        pct_change = float(row.pctchange[0:-1])
     except:
       row.pctchange = 0
 
@@ -118,7 +118,7 @@ elif market_status == 'open':
                 row.name_des, 
                 round(close_price_int,2),
                 decimal.Decimal(row.netchange),
-                decimal.Decimal(row.pctchange),
+                round(pct_change,2),
                 int(row.volume),
                 int(row.marketCap),
                 row.country,
