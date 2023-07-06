@@ -114,6 +114,9 @@ elif market_status == 'open':
     try: net_change = decimal.Decimal(row.netchange)
     except: row.netchange = '0.00'
 
+    try: volume = int(row.volume)
+    except: volume = 0
+
     cursor.execute(
                 f"INSERT INTO [dbo].[nasdaq_data] ([injestdate],[symbol],[name_des],[closeprice],[netchange],[pctchange],[volume],[marketCap],[country],[ipoyear],[industry],[sector],[uri]) values(?,?,?,?,?,?,?,?,?,?,?,?,?)", 
                 ymd,
@@ -122,7 +125,7 @@ elif market_status == 'open':
                 round(close_price_int,2),
                 round(net_change,2),
                 round(pct_change,3),
-                int(row.volume),
+                volume,
                 int(row.marketCap),
                 row.country,
                 row.ipoyear,
