@@ -82,7 +82,7 @@ elif market_status == 'open':
             'MultipleActiveResultSets=False;'
             'Encrypt=yes;'
             'TrustServerCertificate=no;'
-            'Connection Timeout=30;')
+            'Connection Timeout=60;')
   cnxn = pyodbc.connect(connstr)
   cursor = cnxn.cursor()  
   for index, row in pddata.iterrows():
