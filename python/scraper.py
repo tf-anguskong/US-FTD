@@ -9,7 +9,7 @@ import pandas as pd
 import os
 from datetime import datetime
 
-hashfilename = './python/latest-file-hash.txt' # Stores hash of hash_result for comparison
+hashfilename = './SEC-scraper/latest-file-hash.txt' # Stores hash of hash_result for comparison
 hashfile = open(hashfilename, 'r+')
 
 # Define the URL to scrape and pull site data

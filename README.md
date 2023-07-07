@@ -1,5 +1,8 @@
 # SEC-FTDs
 
+### To-Do
+Update Python scripts to use the cleaners.py function. Gotta clean up the scrapers. 
+
 ### Goal
 Automatically update Azure SQL Database with latest SEC FTD Information. The information is published and pulled from here: https://www.sec.gov/data/foiadocsfailsdatahtm
 

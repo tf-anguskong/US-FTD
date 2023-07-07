@@ -30,7 +30,7 @@ jobs:
           SQL_UID: ${{ secrets.SQLUID }}
           SQL_SERVER:  ${{ secrets.SQLSERVER }}
         run: | 
-          python ./python/scraper.py
+          python ./SEC-python/scraper.py
           git config user.name github-actions
           git config user.email Iaintgivingyouthis@gmail.com
           git commit -am "Updated File Hash" || echo "There is nothing to commit"
