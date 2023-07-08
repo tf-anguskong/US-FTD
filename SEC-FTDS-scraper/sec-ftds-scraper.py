@@ -8,8 +8,9 @@ import pyodbc
 import pandas as pd
 import os
 from datetime import datetime
+from functions.cleaners import *
 
-hashfilename = './SEC-scraper/latest-file-hash.txt' # Stores hash of hash_result for comparison
+hashfilename = './SEC-FTDS-scraper/latest-file-hash.txt' # Stores hash of hash_result for comparison
 hashfile = open(hashfilename, 'r+')
 
 # Define the URL to scrape and pull site data
@@ -50,22 +51,7 @@ def get_sec_data(latest_entry):
   del newdata[-3:]  
   return newdata
 
-'''
-######### list_of_list #########
-This cleans up the data provided by SEC into a more useable form. 
 
-This can then be converted into a pandas dataframe. 
-'''  
-def List_of_List(lst):
-    res = []
-    for el in lst:
-      sub = el.split('\', \'') # There are ',' within description so have to use the extra '\',\'' to split properly
-      for s in sub:
-        duh = s.split('|') 
-        duh[-1] = '0' if duh[-1] == '.' else duh[-1]        
-        res.append(duh)
-    return(res)
- 
 #Checks if there is new data based on last hash of url provided, which is stored in hashfilename variable
 # If hash downloaded from SEC matches hashfilename, exit scrtipt
 if hashfile.read() == hash_result.hexdigest():
@@ -79,10 +65,10 @@ else:
   azsqlserver = os.getenv('SQL_SERVER')
   
   latestdata = get_sec_data(latest_entry)
-  lol = List_of_List(latestdata)
+  cleaned_sec_data = sec_ftd_cleaner(latestdata)
   
-  pddata = pd.DataFrame(lol, columns=['setdate','cusip','symbol','qftd','description','price'])
-  connstr = (r'Driver={ODBC Driver 18 for SQL Server};'
+  pddata = pd.DataFrame(cleaned_sec_data, columns=['setdate','cusip','symbol','qftd','description','price'])
+  connstr = ('Driver={ODBC Driver 18 for SQL Server};'
              f'Server={azsqlserver}'
              'Database=SEC-FTD-DEV;'
              'Persist Security Info=False;'
