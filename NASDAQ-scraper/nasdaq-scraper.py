@@ -65,52 +65,23 @@ elif market_status == 'open':
   cnxn = pyodbc.connect(connstr)
   cursor = cnxn.cursor()  
   for index, row in pddata.iterrows():
-    if index % 10 == 0:
-      now = datetime.now()
-      current_time = now.strftime("%H:%M:%S")
-      print(f'Time: {current_time} : i = {index}')
-    #marketCap field is REAL picky
-    try:
-      if row.marketCap == '':
-        row.marketCap = 0
-      else: 
-        row.marketCap = row.marketCap[:-3]
-    except:
-        row.marketCap = 0
-    # pctchange field being picky
-    try:
-      if row.pctchange == '':
-        pct_change = row.pctchange = 0 
-      else:
-        pct_change = float(row.pctchange[0:-1])
-    except:
-      pct_change = row.pctchange = 0
-
-    try: close_price_int = float(row.closeprice[1:])
-    except: row.closeprice = '0.00'
-
-    try: net_change = decimal.Decimal(row.netchange)
-    except: row.netchange = '0.00'
-
-    try: volume = int(row.volume)
-    except: volume = 0
-
-    cursor.execute(
+    try: cursor.execute(
                 f"INSERT INTO [dbo].[nasdaq_data] ([injestdate],[symbol],[name_des],[closeprice],[netchange],[pctchange],[volume],[marketCap],[country],[ipoyear],[industry],[sector],[uri]) values(?,?,?,?,?,?,?,?,?,?,?,?,?)", 
                 ymd,
                 row.symbol, 
                 row.name_des, 
-                round(close_price_int,2),
-                round(net_change,2),
-                round(pct_change,3),
-                volume,
-                int(row.marketCap),
+                row.closeprice,
+                row.netchange,
+                row.pctchange,
+                row.volume,
+                row.marketCap,
                 row.country,
                 row.ipoyear,
                 row.industry,
                 row.sector,
                 row.url
                 )
+    except: print(row) # If this does break on something, print row with problem value
   cnxn.commit()
   cursor.close()
   

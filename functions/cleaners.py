@@ -2,6 +2,7 @@ import pandas as pd
 from datetime import datetime
 import requests
 import json
+import decimal
 
 # Will Contain Cleaner functions for each data set collection
 # Will be imported into various data collection scripts. 
@@ -10,13 +11,26 @@ import json
 def nasdaq_cleaner(nasdaq_csv):
     listoflist = nasdaq_csv.split('\n')
     cleandata = []
+    database_ready = []
+    csv_columns_for_db = ['symbol', 'name_des', 'closeprice', 'netchange', 'pctchange', 'volume', 'marketCap','country','ipoyear','industry','sector','url']
     for line in listoflist:
         duh = line.split(',') # seperates the single list into list of lists
         cleandata.append(duh)
-    
-    csv_columns_for_db = ['symbol', 'name_des', 'closeprice', 'netchange', 'pctchange', 'volume', 'marketCap','country','ipoyear','industry','sector','url']
     pddata = pd.DataFrame(cleandata, columns=csv_columns_for_db)
-    return(pddata)    
+    for index, row in pddata.iterrows():
+        try: row.marketCap = int(row.marketCap[:-3])
+        except: row.marketCap = 0
+        try: row.pctchange = float(row.pctchange[0:-1])
+        except: row.pctchange = row.pctchange = 0
+        try: row.closeprice = float(row.closeprice[1:])
+        except: row.closeprice = '0.00'
+        try: row.netchange = decimal.Decimal(row.netchange)
+        except: row.netchange = '0.00'
+        try: row.volume = int(row.volume)
+        except: row.volume = 0
+        database_ready.append(row)
+    df = pd.DataFrame(database_ready, columns=csv_columns_for_db)
+    return(df)    
 
 
 # Simply expects a list of lists, which is seperated by ','. Which is the only way to consistently break up the SEC FTD data. 
