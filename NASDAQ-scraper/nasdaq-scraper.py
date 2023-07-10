@@ -7,6 +7,10 @@ import pandas as pd
 import os
 import pyodbc
 import decimal
+
+import sys 
+sys.path.insert(1, f'{os.getcwd()}')
+
 from functions.cleaners import *
 
 '''

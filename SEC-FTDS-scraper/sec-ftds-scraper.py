@@ -8,6 +8,10 @@ import pyodbc
 import pandas as pd
 import os
 from datetime import datetime
+import sys
+
+sys.path.insert(1, f'{os.getcwd()}')
+
 from functions.cleaners import *
 
 hashfilename = './SEC-FTDS-scraper/latest-file-hash.txt' # Stores hash of hash_result for comparison
