@@ -29,6 +29,7 @@ jobs:
           SQL_PASSWORD: ${{ secrets.SQLPW }}
           SQL_UID: ${{ secrets.SQLUID }}
           SQL_SERVER:  ${{ secrets.SQLSERVER }}
+        working-directory: ./
         run: | 
           python ./SEC-FTDS-scraper/sec-ftds-scraper.py
           git config user.name github-actions
