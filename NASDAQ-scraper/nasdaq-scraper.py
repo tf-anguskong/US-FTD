@@ -56,7 +56,7 @@ elif market_status == 'open':
   pddata = nasdaq_cleaner(csv_data)
   os.remove(csv_filepath)
 
-  connstr = ('Driver={SQL Server};' # ODBC Driver 18 for SQL Server for github-actions
+  connstr = ('Driver={ODBC Driver 18 for SQL Server};' # ODBC Driver 18 for SQL Server for github-actions
             f'Server={azsqlserver}'
             'Database=SEC-FTD-DEV;'
             'Persist Security Info=False;'
