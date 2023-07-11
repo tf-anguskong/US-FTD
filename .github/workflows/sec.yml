@@ -2,7 +2,7 @@ name: Grab latest SEC FTD Data
 
 on:
   schedule:
-    - cron: "0 0 * * 1,2,3,4,5"  # At 12:00am on Monday, Tuesday, Wednesday, Thursday, and Friday
+    - cron: "10 20 * * 1,2,3,4,5" # Run at 8:10PM UTC / 4:10PM EST week days
   workflow_dispatch: # Manually trigger the workflow
 
 jobs:
