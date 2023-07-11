@@ -10,6 +10,8 @@ import decimal
 # Expects CSV data in and returns a pandas dataframe with properly formatted headers
 def nasdaq_cleaner(nasdaq_csv):
     listoflist = nasdaq_csv.split('\n')
+    listoflist = listoflist[1:]
+    listoflist = listoflist[:-1]
     cleandata = []
     database_ready = []
     csv_columns_for_db = ['symbol', 'name_des', 'closeprice', 'netchange', 'pctchange', 'volume', 'marketCap','country','ipoyear','industry','sector','url']
