@@ -18,8 +18,8 @@ jobs:
         with:
           python-version: "3.x"
     
-      - name: set TimeZone to EST
-        run : sudo timedatectl set-timezone America/New_York
+      - name: set TimeZone to PST
+        run : sudo timedatectl set-timezone America/Los_Angeles
 
       - name: Install python dependencies
         run: pip install beautifulsoup4 requests pyodbc pandas
