@@ -81,7 +81,7 @@ else:
              'MultipleActiveResultSets=False;'
              'Encrypt=yes;'
              'TrustServerCertificate=no;'
-             'Connection Timeout=30;')
+             'Connection Timeout=120;') # Gives Azure SQL time to wake up
   cnxn = pyodbc.connect(connstr)
   cursor = cnxn.cursor()  
   for index, row in pddata.iterrows():

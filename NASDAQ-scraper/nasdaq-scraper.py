@@ -65,7 +65,7 @@ elif market_status == 'open':
             'MultipleActiveResultSets=False;'
             'Encrypt=yes;'
             'TrustServerCertificate=no;'
-            'Connection Timeout=120;')
+            'Connection Timeout=120;') # Gives Azure SQL time to wake up
   cnxn = pyodbc.connect(connstr)
   cursor = cnxn.cursor()  
   for index, row in pddata.iterrows():
