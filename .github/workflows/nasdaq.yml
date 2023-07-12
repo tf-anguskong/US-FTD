@@ -2,7 +2,7 @@ name: Grab daily (trading day) NASDAQ data
 
 on:
   schedule:
-    - cron: "10 20 * * 1,2,3,4,5" # Run at 8:10PM UTC / 4:10PM EST week days
+    - cron: "10 1 * * 2,3,4,5,6" # At 1:10am on Tuesday, Wednesday, Thursday, Friday, and Saturday (UTC)
   workflow_dispatch: # Manually trigger the workflow
 
 jobs:
